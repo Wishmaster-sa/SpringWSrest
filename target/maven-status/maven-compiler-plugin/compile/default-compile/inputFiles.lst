@@ -1,0 +1,14 @@
+/home/sa/NetBeansProjects/SpringWS/src/main/java/com/ega/SpringWS/AddResponseHeaderFilter.java
+/home/sa/NetBeansProjects/SpringWS/src/main/java/com/ega/SpringWS/models/Answer.java
+/home/sa/NetBeansProjects/SpringWS/src/main/java/com/ega/SpringWS/models/Persona.java
+/home/sa/NetBeansProjects/SpringWS/src/main/java/com/ega/SpringWS/SpringWsApplication.java
+/home/sa/NetBeansProjects/SpringWS/src/main/java/com/ega/SpringWS/interfaces/PersonaInterface.java
+/home/sa/NetBeansProjects/SpringWS/src/main/java/com/ega/SpringWS/HttpRequestUtils.java
+/home/sa/NetBeansProjects/SpringWS/src/main/java/com/ega/SpringWS/models/AppSettings.java
+/home/sa/NetBeansProjects/SpringWS/src/main/java/com/ega/SpringWS/services/LogRecordService.java
+/home/sa/NetBeansProjects/SpringWS/src/main/java/com/ega/SpringWS/controller/PersonaController.java
+/home/sa/NetBeansProjects/SpringWS/src/main/java/com/ega/SpringWS/services/PersonaServiceImpl.java
+/home/sa/NetBeansProjects/SpringWS/src/main/java/com/ega/SpringWS/repository/PersonaRepository.java
+/home/sa/NetBeansProjects/SpringWS/src/main/java/com/ega/SpringWS/models/LogRecord.java
+/home/sa/NetBeansProjects/SpringWS/src/main/java/com/ega/SpringWS/controller/PersonaErrorController.java
+/home/sa/NetBeansProjects/SpringWS/src/main/java/com/ega/SpringWS/interfaces/LogRecordInterface.java

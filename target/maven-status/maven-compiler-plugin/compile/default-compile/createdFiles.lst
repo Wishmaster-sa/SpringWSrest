@@ -1,0 +1,15 @@
+com/ega/SpringWS/services/PersonaServiceImpl.class
+com/ega/SpringWS/SpringWsApplication.class
+com/ega/SpringWS/repository/PersonaRepository.class
+com/ega/SpringWS/HttpRequestUtils.class
+com/ega/SpringWS/models/Persona.class
+com/ega/SpringWS/models/LogRecord.class
+com/ega/SpringWS/interfaces/LogRecordInterface.class
+com/ega/SpringWS/models/Answer.class
+com/ega/SpringWS/controller/PersonaController.class
+com/ega/SpringWS/models/Answer$AnswerBuilder.class
+com/ega/SpringWS/controller/PersonaErrorController.class
+com/ega/SpringWS/interfaces/PersonaInterface.class
+com/ega/SpringWS/services/LogRecordService.class
+com/ega/SpringWS/models/AppSettings.class
+com/ega/SpringWS/AddResponseHeaderFilter.class

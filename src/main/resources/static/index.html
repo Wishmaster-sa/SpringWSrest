@@ -1,0 +1,567 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Web Spring REST Service API</title>
+    <meta charset="UTF-8"/>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+      
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+      
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+      
+      .license-url {
+        margin-left: 20px;
+      }
+      
+      .model {
+        margin: 0 0 0px 20px;
+      }
+      
+      .method {
+        margin-left: 20px;
+      }
+      
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+      
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+      
+      .http-method {
+       text-transform: uppercase;
+      }
+      
+      pre.get {
+        background-color: #0f6ab4;
+      }
+      
+      pre.post {
+        background-color: #10a54a;
+      }
+      
+      pre.put {
+        background-color: #c5862b;
+      }
+      
+      pre.delete {
+        background-color: #a41e22;
+      }
+      
+      .huge	{
+      	color: #fff;
+      }
+      
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      
+      code {
+        white-space: pre;
+      }
+      
+      .nickname {
+        font-weight: bold;
+      }
+      
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+      
+      .up {
+        float:right;
+      }
+      
+      .parameter {
+        width: 500px;
+      }
+      
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+      
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+      
+      .param-type {
+        font-style: italic;
+      }
+      
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+      
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+      
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+      
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+      
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+      
+      .param-header {
+        font-weight: bold;
+      }
+      
+      .method-tags {
+        text-align: right;
+      }
+      
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>Web Spring REST Service API</h1>
+    <div class="app-desc">The API for the Web Service project</div>
+    <div class="app-desc">More information: <a href="http://localhost:8080/swagger-ui/index.html">testing API with Swagger</a></div>
+    <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
+    <div class="app-desc">Version: 1.0.0</div>
+    <div class="app-desc">BasePath:/DanyliukOleksandr/WebSpringRESTService/1.0.0</div>
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Persona">Persona</a></h4>
+  <ul>
+  <li><a href="#addPersona"><code><span class="http-method">post</span> /api/v1/persons/add</code></a></li>
+  <li><a href="#checkPersona"><code><span class="http-method">get</span> /api/v1/persons/check/{rnokpp}</code></a></li>
+  <li><a href="#deletePersona"><code><span class="http-method">delete</span> /api/v1/persons/delete/{rnokpp}</code></a></li>
+  <li><a href="#findPersona"><code><span class="http-method">get</span> /api/v1/persons/find/{rnokpp}</code></a></li>
+  <li><a href="#showAll"><code><span class="http-method">get</span> /api/v1/persons/list</code></a></li>
+  <li><a href="#testAPI"><code><span class="http-method">get</span> /api/v1/persons/test</code></a></li>
+  <li><a href="#updatePersona"><code><span class="http-method">patch</span> /api/v1/persons/update</code></a></li>
+  </ul>
+
+  <h1><a name="Persona">Persona</a></h1>
+  <div class="method"><a name="addPersona"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/v1/persons/add</code></pre></div>
+    <div class="method-summary">Додає користувача до БД. (<span class="nickname">addPersona</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">firstName (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Імʼя </div>      <div class="param">lastName (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Прізвище </div>      <div class="param">birthDay (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; День народження </div>      <div class="param">rnokpp (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; РНОКПП </div>      <div class="param">pasport (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Номер паспорту </div>      <div class="param">unzr (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Код УНЗР </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ApiResponse">ApiResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "result" : "result",
+  "descr" : "descr",
+  "status" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Відповідь на запит
+        <a href="#ApiResponse">ApiResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="checkPersona"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/persons/check/{rnokpp}</code></pre></div>
+    <div class="method-summary">Задає запит на перевірку користувача. Перевірка триває 10 хвилин. Це демонстрація роботи асинхронного сервісу. В якості параметра задається РНОКПП користувача. (<span class="nickname">checkPersona</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">rnokpp (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; РНОКПП користувача </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ApiResponse">ApiResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "result" : "result",
+  "descr" : "descr",
+  "status" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Відповідь на запит
+        <a href="#ApiResponse">ApiResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deletePersona"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/v1/persons/delete/{rnokpp}</code></pre></div>
+    <div class="method-summary">Видаляє користувача з БД. (<span class="nickname">deletePersona</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">rnokpp (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; РНОКПП </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ApiResponse">ApiResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "result" : "result",
+  "descr" : "descr",
+  "status" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Відповідь на запит
+        <a href="#ApiResponse">ApiResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="findPersona"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/persons/find/{rnokpp}</code></pre></div>
+    <div class="method-summary">Шукає користувача за РНОКПП. (<span class="nickname">findPersona</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">rnokpp (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ApiResponse">ApiResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "result" : "result",
+  "descr" : "descr",
+  "status" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Відповідь на запит
+        <a href="#ApiResponse">ApiResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="showAll"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/persons/list</code></pre></div>
+    <div class="method-summary">Відображає усіх користувачів, які є в базі даних. (<span class="nickname">showAll</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ApiResponse">ApiResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "result" : "result",
+  "descr" : "descr",
+  "status" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Відповідь на запит
+        <a href="#ApiResponse">ApiResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="testAPI"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/persons/test</code></pre></div>
+    <div class="method-summary">Перевірка працездатності сервіса. Повертає поточний час. (<span class="nickname">testAPI</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ApiResponse">ApiResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "result" : "result",
+  "descr" : "descr",
+  "status" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Відповідь на запит
+        <a href="#ApiResponse">ApiResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updatePersona"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="patch"><code class="huge"><span class="http-method">patch</span> /api/v1/persons/update</code></pre></div>
+    <div class="method-summary">Змінює дані користувача в БД. (<span class="nickname">updatePersona</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">firstName (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Імʼя </div>      <div class="param">lastName (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Призвище </div>      <div class="param">birthDay (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; День народження </div>      <div class="param">rnokpp (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; РНОКПП </div>      <div class="param">pasport (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Номер паспорта </div>      <div class="param">unzr (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Код УНЗР </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ApiResponse">ApiResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "result" : "result",
+  "descr" : "descr",
+  "status" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Відповідь на запит
+        <a href="#ApiResponse">ApiResponse</a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#ApiResponse"><code>ApiResponse</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="ApiResponse"><code>ApiResponse</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">status (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> Статус відповіді (true - запит виконано успішно, false - запит виконано з помилками) </div>
+<div class="param">descr (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Текстовий опис відповіді (зазвичай якщо є помилка) </div>
+<div class="param">result (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Результат запита </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>
