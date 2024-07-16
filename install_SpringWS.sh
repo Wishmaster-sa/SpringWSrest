@@ -180,11 +180,11 @@ if [ "$ans" = "y" ]; then
     echo "******************************************************************************
     *                  встановлення Faker
     ******************************************************************************"
-    pip3-install Faker
+    python3 -m pip install faker
 
     /usr/lib/apache-netbeans/java/maven/bin/mvn package
 
-    sudo bash springws.service install
+    sudo bash springws-service.sh install
 
     python3 fill_fakerdb.py 100
 
