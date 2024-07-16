@@ -138,20 +138,20 @@ sudo apt install git -y
 echo "******************************************************************************
 *                  Клонування Spring Web-Service із Github
 ******************************************************************************"
-if [ -e ./SpringWS ]; then
-	echo "проєкт SpringWS вже існує, клонування пропущено"
+if [ -e ./SpringWSrest ]; then
+	echo "проєкт SpringWSrest вже існує, клонування пропущено"
 else 
-	git clone https://github.com/Wishmaster-sa/SpringWS.git
+	git clone https://github.com/Wishmaster-sa/SpringWSrest.git
 
-	sudo chown -R $currentuser:$currentuser ./SpringWS
-	sudo mv ./SpringWS/maven ./SpringWS/.mvn
+	sudo chown -R $currentuser:$currentuser ./SpringWSrest
+#	sudo mv ./SpringWS/maven ./SpringWS/.mvn
 fi
 
 
 echo "******************************************************************************
 *                  Налаштування проєкта
 ******************************************************************************"
-propertiesFile="./SpringWS/src/main/resources/application.properties"  
+propertiesFile="./SpringWSrest/src/main/resources/application.properties"  
 
 old_user=$(cat $propertiesFile | \
   awk -F'[=]' '$1 == "spring.datasource.username" {print "username="$2}' | sed 's/.*=//')
@@ -167,8 +167,8 @@ old_base=$(cat $propertiesFile |   awk -F'[=]' '$1 == "spring.datasource.url" {p
 
 sed -i "s/$old_base/$db_name/g" $propertiesFile
 
-cd ./SpringWS
-sudo bash mvnw -N wrapper:wrapper
+cd ./SpringWSrest
+#sudo bash mvnw -N wrapper:wrapper
 
 
 echo "******************************************************************************
