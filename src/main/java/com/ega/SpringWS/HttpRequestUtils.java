@@ -5,6 +5,9 @@
 package com.ega.SpringWS;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -74,4 +77,25 @@ public class HttpRequestUtils {
 
         return request.getRequestURI();
     }
+    
+    
+    //повертає заголовки запиту
+    public static Map<String,String> getHeaders() {
+        Map<String,String> headers = new HashMap<>();
+        
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
+    Enumeration<String> headerNames = request.getHeaderNames();
+
+    if (headerNames != null) {
+            while (headerNames.hasMoreElements()) {
+                String headerName = headerNames.nextElement();
+                String headerValue = request.getHeader(headerName);
+                    System.out.println("Header: "+headerName+": <" + headerValue+">");
+                    headers.put(headerName, headerValue);
+            }
+    }        
+        return headers;
+    }
+    
 }
