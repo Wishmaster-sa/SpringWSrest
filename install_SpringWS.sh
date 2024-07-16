@@ -193,7 +193,7 @@ echo "**************************************************************************
 
     python3 fill_fakerdb.py 100
 
-    sudo bash springws-service.sh stop
+    sudo systemctl stop springws.service
 
 else
     echo "ok"
