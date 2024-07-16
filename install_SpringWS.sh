@@ -169,7 +169,7 @@ sed -i "s/$old_base/$db_name/g" $propertiesFile
 cd ./SpringWSrest
 #sudo bash mvnw -N wrapper:wrapper
 
-read -p "Do you want to fill database Fake data?: (y/n)" ans
+read -p "Do you want to fill database Fake data? (y/n): " ans
 
 if [ "$ans" = "y" ]; then
     echo "******************************************************************************
