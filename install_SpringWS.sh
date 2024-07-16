@@ -39,6 +39,8 @@ else
     echo "Прийнято"
 fi
 
+read -p "Чи бажаете Ви одразу наповнити базу даних випадковими персонами? (y/n): " ans
+
 echo "************************** 
 Ім'я бази даних: $db_name
 Користувач: $db_user
@@ -168,8 +170,8 @@ sed -i "s/$old_base/$db_name/g" $propertiesFile
 
 cd ./SpringWSrest
 #sudo bash mvnw -N wrapper:wrapper
+/usr/lib/apache-netbeans/java/maven/bin/mvn package
 
-read -p "Do you want to fill database Fake data? (y/n): " ans
 
 if [ "$ans" = "y" ]; then
     echo "******************************************************************************
@@ -182,11 +184,16 @@ if [ "$ans" = "y" ]; then
     ******************************************************************************"
     python3 -m pip install faker
 
-    /usr/lib/apache-netbeans/java/maven/bin/mvn package
-
     sudo bash springws-service.sh install
+    
+echo "******************************************************************************
+    *                  Очікуємо на старт сервіса...
+    ******************************************************************************"
+    sleep 5s
 
     python3 fill_fakerdb.py 100
+
+    sudo bash springws-service.sh stop
 
 else
     echo "ok"
