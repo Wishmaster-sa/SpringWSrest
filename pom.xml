@@ -11,7 +11,7 @@
 	<groupId>com.ega</groupId>
 	<artifactId>SpringWS</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringWS</name>
+	<name>Spring REST Webservice</name>
 	<description>Demo project for Spring Boot Web Services</description>
 	<properties>
 		<java.version>17</java.version>
@@ -20,6 +20,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+                        <version>3.3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -36,16 +37,19 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+                        <version>3.3.1</version>
 			<scope>test</scope>
 		</dependency>
                 <dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
+                        <version>42.7.3</version>
 		</dependency>
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-data-jpa</artifactId>
+                    <version>3.3.1</version>
                 </dependency>
                 <!-- https://mvnrepository.com/artifact/org.json/json -->
                     <dependency>
