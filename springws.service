@@ -7,7 +7,7 @@ User=sa
 # The configuration file application.properties should be here:
 
 #change this to your workspace
-WorkingDirectory=/opt/SpringWSrest
+WorkingDirectory=/opt/SpringWS
 
 #path to executable. 
 #executable is a bash script which calls jar file
