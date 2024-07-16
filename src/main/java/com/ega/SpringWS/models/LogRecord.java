@@ -5,6 +5,8 @@
 package com.ega.SpringWS.models;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.Data;
 import org.json.JSONObject;
 
@@ -23,6 +25,7 @@ public class LogRecord {
     private boolean isError;
     private String descr;
     private Answer result;
+    private Map<String, String> headers;
 
     //Конструктор класу за замовчуванням
     public LogRecord(){
@@ -33,6 +36,7 @@ public class LogRecord {
         this.body = "";
         this.isError = true;
         this.descr = "log record is not init!";
+        this.headers = new HashMap<>();
                 
     }
     
@@ -42,6 +46,7 @@ public class LogRecord {
         jsData.put("dateTime",getDateTime());
         jsData.put("ip",getIp());
         jsData.put("httpMethod",getHttpMethod());
+        jsData.put("headers", headers);
         jsData.put("resource",getResource());
         jsData.put("isError",isError());
         jsData.put("descr",getDescr());
