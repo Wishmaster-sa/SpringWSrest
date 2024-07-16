@@ -1,0 +1,22 @@
+[Unit]
+Description=Spring Java REST Service
+After=syslog.target
+
+[Service]
+User=sa
+# The configuration file application.properties should be here:
+
+#change this to your workspace
+WorkingDirectory=/opt/SpringWSrest
+
+#path to executable. 
+#executable is a bash script which calls jar file
+ExecStart=java -jar /opt/SpringWS/SpringWS-0.0.1-SNAPSHOT.jar
+
+SuccessExitStatus=143
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
