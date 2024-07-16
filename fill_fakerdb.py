@@ -52,7 +52,7 @@ for x in range(num_persons):
 	url = "http://localhost:8080/api/v1/persons/add"
 	try:
 		x= requests.post(url, json = persona)
-		print("Answer: "+x.text)
+		#print("Answer: "+x.text)
 	except ConnectionRefusedError:
 		print("Error connect to Webservice! 1")	
 		sys.exit(-1)
@@ -64,6 +64,6 @@ for x in range(num_persons):
 		sys.exit(-1)
 			
 else:
-	print("Finally finished!")
+	print("Наповнення бази завершено!")
 	
 	
