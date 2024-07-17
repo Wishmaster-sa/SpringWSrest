@@ -5,7 +5,7 @@ function installService() {
 	echo 'Встановлюю сервіс...'
 	sudo mkdir /opt/SpringWS
 	sudo cp ./target/SpringWS-0.0.1-SNAPSHOT.jar /opt/SpringWS
-	sudo cp ./webservice.settings /opt/SpringWS
+	#sudo cp ./webservice.settings /opt/SpringWS
 	sudo cp ./springws.service /etc/systemd/system
 	sudo sudo systemctl daemon-reload
 	sudo systemctl enable springws.service

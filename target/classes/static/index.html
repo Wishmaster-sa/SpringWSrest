@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Web Spring REST Service API</title>
+    <meta charset="UTF-8"/>
     <style type="text/css">
       body {
       	font-family: Trebuchet MS, sans-serif;
@@ -209,7 +210,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="post"><code class="huge"><span class="http-method">post</span> /api/v1/persons/add</code></pre></div>
-    <div class="method-summary">Додає персону до БД. (<span class="nickname">addPersona</span>)</div>
+    <div class="method-summary">Додає користувача до БД. (<span class="nickname">addPersona</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -222,13 +223,13 @@
       
             <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Імʼя </div>      <div class="param">lastName (optional)</div>
       
-            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Призвище </div>      <div class="param">birthDay (optional)</div>
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Прізвище </div>      <div class="param">birthDay (optional)</div>
       
             <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; День народження </div>      <div class="param">rnokpp (required)</div>
       
-            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Персональний РНОКПП </div>      <div class="param">pasport (optional)</div>
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; РНОКПП </div>      <div class="param">pasport (optional)</div>
       
-            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Номер паспорта </div>      <div class="param">unzr (optional)</div>
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Номер паспорту </div>      <div class="param">unzr (optional)</div>
       
             <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Код УНЗР </div>    </div>  <!-- field-items -->
 
@@ -266,14 +267,14 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/persons/check/{rnokpp}</code></pre></div>
-    <div class="method-summary">Задає запит на перевірку персони. Перевірка триває 10 хвилин. Це демонстрація роботи асінхронного сервісу. В якості параметра задається РНОКПП персони. (<span class="nickname">checkPersona</span>)</div>
+    <div class="method-summary">Задає запит на перевірку користувача. Перевірка триває 10 хвилин. Це демонстрація роботи асинхронного сервісу. В якості параметра задається РНОКПП користувача. (<span class="nickname">checkPersona</span>)</div>
     <div class="method-notes"></div>
 
     <h3 class="field-label">Path parameters</h3>
     <div class="field-items">
       <div class="param">rnokpp (required)</div>
       
-            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; РНОКПП персони </div>    </div>  <!-- field-items -->
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; РНОКПП користувача </div>    </div>  <!-- field-items -->
 
 
 
@@ -313,14 +314,14 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/v1/persons/delete/{rnokpp}</code></pre></div>
-    <div class="method-summary">Видаляє персону з БД. (<span class="nickname">deletePersona</span>)</div>
+    <div class="method-summary">Видаляє користувача з БД. (<span class="nickname">deletePersona</span>)</div>
     <div class="method-notes"></div>
 
     <h3 class="field-label">Path parameters</h3>
     <div class="field-items">
       <div class="param">rnokpp (required)</div>
       
-            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Персональний РНОКПП </div>    </div>  <!-- field-items -->
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; РНОКПП </div>    </div>  <!-- field-items -->
 
 
 
@@ -360,7 +361,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/persons/find/{rnokpp}</code></pre></div>
-    <div class="method-summary">Шукає персону по РНОКПП. (<span class="nickname">findPersona</span>)</div>
+    <div class="method-summary">Шукає користувача за РНОКПП. (<span class="nickname">findPersona</span>)</div>
     <div class="method-notes"></div>
 
     <h3 class="field-label">Path parameters</h3>
@@ -407,7 +408,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/persons/list</code></pre></div>
-    <div class="method-summary">Відображає усі персоні яки є в базі даних. (<span class="nickname">showAll</span>)</div>
+    <div class="method-summary">Відображає усіх користувачів, які є в базі даних. (<span class="nickname">showAll</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -491,7 +492,7 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="patch"><code class="huge"><span class="http-method">patch</span> /api/v1/persons/update</code></pre></div>
-    <div class="method-summary">Змінює дані персони в БД. (<span class="nickname">updatePersona</span>)</div>
+    <div class="method-summary">Змінює дані користувача в БД. (<span class="nickname">updatePersona</span>)</div>
     <div class="method-notes"></div>
 
 
@@ -508,7 +509,7 @@
       
             <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; День народження </div>      <div class="param">rnokpp (required)</div>
       
-            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Персональний РНОКПП </div>      <div class="param">pasport (optional)</div>
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; РНОКПП </div>      <div class="param">pasport (optional)</div>
       
             <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Номер паспорта </div>      <div class="param">unzr (optional)</div>
       

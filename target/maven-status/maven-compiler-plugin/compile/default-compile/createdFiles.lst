@@ -11,5 +11,4 @@ com/ega/SpringWS/models/Answer$AnswerBuilder.class
 com/ega/SpringWS/controller/PersonaErrorController.class
 com/ega/SpringWS/interfaces/PersonaInterface.class
 com/ega/SpringWS/services/LogRecordService.class
-com/ega/SpringWS/models/AppSettings.class
 com/ega/SpringWS/AddResponseHeaderFilter.class

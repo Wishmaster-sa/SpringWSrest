@@ -152,7 +152,7 @@ fi
 echo "******************************************************************************
 *                  Налаштування проєкта
 ******************************************************************************"
-propertiesFile="./SpringWSrest/src/main/resources/application.properties"  
+propertiesFile="./SpringWSrest/config/external-config.properties"  
 
 old_user=$(cat $propertiesFile | \
   awk -F'[=]' '$1 == "spring.datasource.username" {print "username="$2}' | sed 's/.*=//')
@@ -171,6 +171,8 @@ sed -i "s/$old_base/$db_name/g" $propertiesFile
 cd ./SpringWSrest
 #sudo bash mvnw -N wrapper:wrapper
 /usr/lib/apache-netbeans/java/maven/bin/mvn package
+
+sudo chown -R $currentuser:$currentuser ./SpringWSrest
 
 
 if [ "$ans" = "y" ]; then
@@ -194,6 +196,8 @@ echo "**************************************************************************
     python3 fill_fakerdb.py 100
 
     sudo systemctl stop springws.service
+
+    sleep 2s
 
 else
     echo "ok"
