@@ -1,6 +1,7 @@
 com/ega/SpringWS/services/PersonaServiceImpl.class
 com/ega/SpringWS/SpringWsApplication.class
 com/ega/SpringWS/repository/PersonaRepository.class
+com/ega/SpringWS/SecurityConfig.class
 com/ega/SpringWS/HttpRequestUtils.class
 com/ega/SpringWS/models/Persona.class
 com/ega/SpringWS/models/LogRecord.class

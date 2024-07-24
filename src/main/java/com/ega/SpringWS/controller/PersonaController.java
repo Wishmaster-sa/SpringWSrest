@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ega.SpringWS.models.Answer;
-import com.ega.SpringWS.models.LogRecord;
-import com.ega.SpringWS.services.LogRecordService;
 import java.time.LocalDateTime;
-import org.springframework.context.annotation.Bean;
 
 /**
  *

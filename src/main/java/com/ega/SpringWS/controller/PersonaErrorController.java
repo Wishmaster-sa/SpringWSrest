@@ -111,7 +111,6 @@ public class PersonaErrorController implements ErrorController{
         RequestAttributes requestAttributes = new ServletRequestAttributes(request);
 
         return this.getErrorAttributes((HttpServletRequest) requestAttributes, options);
-    
     }
     
     
