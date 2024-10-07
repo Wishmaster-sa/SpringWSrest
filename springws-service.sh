@@ -9,7 +9,7 @@ function installService() {
         sudo cp -R config/* /opt/SpringWS/config 
 	#sudo cp ./webservice.settings /opt/SpringWS
 	sudo cp ./springws.service /etc/systemd/system
-	sudo sudo systemctl daemon-reload
+	sudo systemctl daemon-reload
 	sudo systemctl enable springws.service
 	sudo systemctl start springws.service
 	sudo systemctl status springws.service
