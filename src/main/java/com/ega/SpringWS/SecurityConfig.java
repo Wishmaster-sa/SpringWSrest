@@ -25,6 +25,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
         MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
         http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/**")).permitAll());
+
+        //Щоб була можливість робити POST запити з SSL
+        http.csrf(AbstractHttpConfigurer::disable);
+      
         return http.build();
     }
 }
