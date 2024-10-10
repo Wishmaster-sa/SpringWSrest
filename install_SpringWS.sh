@@ -174,9 +174,11 @@ sed -i "s/User=sa/User=$currentuser/g" $autostartFile
 
 cd ./SpringWSrest
 #sudo bash mvnw -N wrapper:wrapper
-/usr/lib/apache-netbeans/java/maven/bin/mvn package
 
 sudo chown -R $currentuser:$currentuser ./SpringWSrest
+
+/usr/lib/apache-netbeans/java/maven/bin/mvn package
+
 
 
 if [ "$ans" = "y" ]; then
