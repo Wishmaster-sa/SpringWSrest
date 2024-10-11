@@ -4,6 +4,7 @@ db_user=spring_user
 db_pass='pass'
 db_name=db_spring
 netbeans19=apache-netbeans_19-1_all.deb 
+ans=y
 
 if [[ $EUID -ne 0 ]]; then
     echo "Скрипт потрібно запускати з правами root (додайте sudo перед командою)"
@@ -39,7 +40,7 @@ else
     echo "Прийнято"
 fi
 
-read -p "Чи бажаете Ви одразу наповнити базу даних випадковими персонами? (y/n): " ans
+#read -p "Чи бажаете Ви одразу наповнити базу даних випадковими персонами? (y/n): " ans
 
 echo "************************** 
 Ім'я бази даних: $db_name
