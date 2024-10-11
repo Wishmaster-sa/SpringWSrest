@@ -99,39 +99,51 @@ GRANT ALL PRIVILEGES ON DATABASE db_spring TO spring;
 
 Для вихода з командного рядку БД psql введіть \q
 
-#### Завантажити та встановити середовище розробки Apache NetBeans ви можете через браузер, або через додаток Ubuntu Software
+#### Завантажити та встановити середовище розробки Apache NetBeans ви можете через браузер, або через додаток Ubuntu Software, або якщо використовується командний рядок за допомогою наступної команди
+   ```bash
+   curl https://archive.apache.org/dist/netbeans/netbeans-installers/19/apache-netbeans_19-1_all.deb --output apache-netbeans_19-1_all.deb
+   ```
+та
+   ```bash
+   sudo dpkg -i apache-netbeans_19-1_all.deb
+   ```
+
 
 #### Завантажити Github клієнт
 
 ```bash
 sudo apt install git
 ```
-#### Отримаємо та запам'ятаємо ім'я поточного користувача
-
-```bash
-whoami
-```
 #### Клонування репозиторію
 
-```bash
-git clone https://github.com/Wishmaster-sa/SpringWSrest.git
-
-cd SpringWSrest
-```
-### Компілюємо вихідний файл
-```bash
-/usr/lib/apache-netbeans/java/maven/bin/mvn package
-```
+   ```bash
+   git clone https://github.com/Wishmaster-sa/SpringWSrest.git
+   ```
 
 #### Налаштування підключення до БД в проєкті
 
-Відкрити файл конфігурації застосунку Spring `./SpringWSrest/config/external-config.properties` та встановити коректні параметри підключення до БД - ім'я бази, ім'я та пароль користувача згідно значень, заданих на [кроці налаштування бази даних PostgreSQL](#налаштування-бази-даних-postgresql). Наприклад:
+Відкрити файл конфігурації застосунку Spring `./SpringWSrest/config/external-config.properties`
+   ```bash
+   nano ./SpringWSrest/config/external-config.properties
+   ```
+та встановити коректні параметри підключення до БД - ім'я бази, ім'я та пароль користувача згідно значень, заданих на [кроці налаштування бази даних PostgreSQL](#налаштування-бази-даних-postgresql).
+
 ```
 spring.datasource.url=jdbc:postgresql://localhost:5432/dbname
 spring.datasource.username=dbusername
 spring.datasource.password=dbuserpassword
 ```
 
+#### Переходимо до каталогу з проєктом
+
+   ```bash
+   cd SpringWSrest
+   ```
+
+### Компілюємо вихідний файл
+```bash
+/usr/lib/apache-netbeans/java/maven/bin/mvn package
+```
 
 ### Запуск сервісу (ви повинні знаходитись в каталозі з сервісом SpringWSrest)
 
@@ -151,25 +163,6 @@ http://localhost:8080/
 
 - Doc: http://[адреса серверу]:8080/
 - Swagger UI: http://[адреса серверу]:8080/swagger-ui/index.html
-
-## Наповнення бази даних тестовими записами
-Для цілей швидкого розгортання та використання сервісу ми додаємо Python-скрипт, який дозволяє швидко згенерувати
-необхідну кількість записів в БД.
-Для цього вам потрібен Python та бібліотека Faker
-
-### Встановимо python (якщо він у вас вже є, то цей пункт можно пропустити)
-```bash
-sudo apt install python3 python3-pip -y
-```
-### Встановимо біліотеку Faker яка вміє генерувати випадкові ФІО та інше.
-```bash
-python3 -m pip install faker
-```
-### Запустим наповнення бази даних (у вас повинен бути вже запущений SpringWSrest сервіс)
-   ```python
-   python3 fill_fakerdb.py 100
-   ```
-де 100 - кількість об'єктів (користувачів), яка буде згенерована та додана до БД. Ви можете встановити іншу кількість записів.
 
 ## Налаштування як системної служби systemd
 
@@ -213,6 +206,25 @@ python3 -m pip install faker
 3) Припинити сервіс
 4) Видалити сервіс
 5) Вихід
+
+## Наповнення бази даних тестовими записами
+Для цілей швидкого розгортання та використання сервісу ми додаємо Python-скрипт, який дозволяє швидко згенерувати
+необхідну кількість записів в БД.
+Для цього вам потрібен Python та бібліотека Faker
+
+### Встановимо python (якщо він у вас вже є, то цей пункт можно пропустити)
+```bash
+sudo apt install python3 python3-pip -y
+```
+### Встановимо біліотеку Faker яка вміє генерувати випадкові ФІО та інше.
+```bash
+python3 -m pip install faker
+```
+### Запустим наповнення бази даних (у вас повинен бути вже запущений SpringWSrest сервіс)
+   ```python
+   python3 fill_fakerdb.py 100
+   ```
+де 100 - кількість об'єктів (користувачів), яка буде згенерована та додана до БД. Ви можете встановити іншу кількість записів.
 
 ## Ліцензія
 
