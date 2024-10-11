@@ -32,7 +32,11 @@
 #### Використання скрипта install_SpringWS.sh
 
 На вашій робочій станції для розробки виконайте наступні кроки:
-1. Завантажте скрипт `install_SpringWS.sh` в папку Documents
+1. Завантажте скрипт автоматизациї встановлення `install_SpringWS.sh` в папку Documents:
+   ```bash
+   wget https://raw.githubusercontent.com/Wishmaster-sa/SpringWSrest/master/install_SpringWS.sh
+   ```
+
 2. Зробіть файл виконуваним:
 
    ```bash
