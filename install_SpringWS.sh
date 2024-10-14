@@ -173,10 +173,11 @@ sed -i "s/$old_base/$db_name/g" $propertiesFile
 autostartFile="./SpringWSrest/springws.service" 
 sed -i "s/User=sa/User=$currentuser/g" $autostartFile
 
-cd ./SpringWSrest
 #sudo bash mvnw -N wrapper:wrapper
 
 sudo chown -R $currentuser:$currentuser ./SpringWSrest
+
+cd ./SpringWSrest
 
 /usr/lib/apache-netbeans/java/maven/bin/mvn package
 
