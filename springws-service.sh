@@ -3,6 +3,10 @@
 
 function installService() {
 	echo 'Встановлюю сервіс...'
+ 	#modify service daemon for current user
+	autostartFile="./springws.service"
+ 	currentuser=$(stat -c "%G" .)
+	sed -i "s/User=sa/User=$currentuser/g" $autostartFile
 	sudo mkdir /opt/SpringWS
 	sudo mkdir /opt/SpringWS/config
 	sudo cp ./target/SpringWS-0.0.1-SNAPSHOT.jar /opt/SpringWS
