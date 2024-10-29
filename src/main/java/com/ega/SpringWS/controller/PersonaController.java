@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ega.SpringWS.models.Answer;
 import java.time.LocalDateTime;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 /**
  *
@@ -139,12 +140,34 @@ public class PersonaController {
         
         return ans;
     }
+
+    @PostMapping("add2")
+    public Answer add2Persona(@RequestBody String persona){
+    //    Answer ans = Persona.isValid(persona);
+        Answer ans = Answer.builder().status(Boolean.TRUE).descr("Success").result(persona).build();
+        
+    //    if(!ans.getStatus())return ans;
+    /*    
+        System.out.println("==============================================================================================");
+        System.out.println("Додана персона: "+persona.toString());
+        System.out.println("ip: "+HttpRequestUtils.getClientIpAddress()
+                +"; Метод: "+HttpRequestUtils.getHttpMethod()
+                +"; Шлях: "+HttpRequestUtils.getPath()
+                +"; Тіло запиту: "+persona.toJSON().toString()
+        );
+        */
+    
+        //формуємо та повертаємо користувачу результат, який був опрацьований в сервісі.
+    //    ans =  service.addPersona(persona);
+        
+        return ans;
+    }
     
 //Анотація PutMapping говорить, що описується обробка запиту типу HTTP PUT
 //Тут ми говоримо, що шлях http://localhost:8080/api/v1/persons буде використовуватись для оновлення користувача в базі даних.
 //зіставлення користувача буде виконуватись за ID
 //Параметри запиту повинні додаватись у тілі запиту в JSON форматі.
-    @PutMapping("update")
+    @PatchMapping("update")
    //Анотація @RequestBody говорить SPRINGу що тіло запиту треба перетворити з JSON в обʼєкт класу Persona
     public Answer updatePersona(@RequestBody Persona persona){
         Answer ans;

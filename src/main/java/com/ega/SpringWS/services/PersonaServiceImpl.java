@@ -19,6 +19,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
 
 
 
@@ -133,16 +135,16 @@ public class PersonaServiceImpl implements PersonaInterface{
     //Функція оновлює дані користувача
     public Answer updatePersona(Persona persona) {
           Answer ans;
+          Persona updatedPersona;
           ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
-          try{
-                //deletePersona(persona.getRnokpp());
-                var result = repository.save(persona);
-                //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
-                ans.setStatus(Boolean.TRUE);            
-                ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
-                ans.setResult(result.toJSON().toString());       //Тут результат відповіді.
-            }catch (Exception ex){                    //якщо помилка
-              ans.setDescr(ex.getMessage());        //надаємо опис помилки
+            try {
+                updatedPersona = repository.findByRnokpp(persona.getRnokpp());
+                BeanUtils.copyProperties(persona, updatedPersona);
+                repository.save(updatedPersona);
+                ans.setStatus(Boolean.TRUE);
+                ans.setDescr("Persona with RNOKPP "+persona.getRnokpp()+" updated successfully");
+            }catch(Exception ex){
+                ans.setDescr("Error: "+ex.getMessage());
             }
           
            //записуємо лог
