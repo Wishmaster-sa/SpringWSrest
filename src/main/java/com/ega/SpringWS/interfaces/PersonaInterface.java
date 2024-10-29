@@ -18,6 +18,9 @@ public interface PersonaInterface {
    public Answer checkPersona(String rnokpp);
    public Answer updatePersona(Persona persona);
    public Answer deletePersona(String rnokpp);
+   public Answer findByBirthDate(String birthDate);
+   public Answer findByPasport(String pasport);
+   public Answer findByUnzr(String unzr);
    public Answer findByFirstName(String firstName);
    public Answer findByLastNameWith(String firstName);
    public Answer findAllFirstNameContains(String firstName);

@@ -20,7 +20,6 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.BeansException;
 
 
 
@@ -368,6 +367,80 @@ public class PersonaServiceImpl implements PersonaInterface{
           //записуем лог
           writeLog(ans);
 
+          return ans;           //повертаємо результат до контролера.
+    }
+
+    @Override
+    public Answer findByBirthDate(String birthDate) {
+          Answer ans;
+          LocalDate dt = LocalDate.parse(birthDate);
+          
+          ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
+          try{
+            List<Persona> result = repository.findByBirthDate(dt);
+            //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
+            ans.setStatus(Boolean.TRUE);
+            if(result.isEmpty()){
+                ans.setDescr("Person with birthDate: "+birthDate+" not found in database");   //В описі відповіді вказуемо що запит успішний.
+            }else{
+                ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setResult(Persona.listToJSON(result).toString());       //Тут результат відповіді.
+            }
+          }catch (Exception ex){                    //якщо помилка
+            ans.setStatus(Boolean.FALSE);            
+            ans.setDescr(ex.getMessage());        //надаємо опис помилки
+          }
+          
+          //записуем лог
+          writeLog(ans);
+          return ans;           //повертаємо результат до контролера.
+   }
+
+    @Override
+    public Answer findByPasport(String pasport) {
+          Answer ans;
+          ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
+          try{
+            var result = repository.findByPasport(pasport);
+            //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
+            ans.setStatus(Boolean.TRUE);
+            if(result==null){
+                ans.setDescr("Person with Pasport: "+pasport+" not found in database");   //В описі відповіді зазначаємо, що запит успішний.
+            }else{
+                ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setResult(result.toJSON().toString());       //Тут результат відповіді.
+            }
+          }catch (Exception ex){                    //якщо помилка
+            ans.setStatus(Boolean.FALSE);            
+            ans.setDescr(ex.getMessage());        //надаємо опис помилки
+          }
+          
+           //записуємо лог
+           writeLog(ans);
+          return ans;           //повертаємо результат до контролера.
+    }
+
+    @Override
+    public Answer findByUnzr(String unzr) {
+          Answer ans;
+          ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
+          try{
+            var result = repository.findByUnzr(unzr);
+            //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
+            ans.setStatus(Boolean.TRUE);
+            if(result==null){
+                ans.setDescr("Person with unzr: "+unzr+" not found in database");   //В описі відповіді зазначаємо, що запит успішний.
+            }else{
+                ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setResult(result.toJSON().toString());       //Тут результат відповіді.
+            }
+          }catch (Exception ex){                    //якщо помилка
+            ans.setStatus(Boolean.FALSE);            
+            ans.setDescr(ex.getMessage());        //надаємо опис помилки
+          }
+          
+           //записуємо лог
+           writeLog(ans);
           return ans;           //повертаємо результат до контролера.
     }
 

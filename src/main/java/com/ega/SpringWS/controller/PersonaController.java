@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -125,10 +124,10 @@ public class PersonaController {
         Answer ans = Persona.isValid(persona);
         
         if(!ans.getStatus())return ans;
-    /*    
+        
         System.out.println("==============================================================================================");
         System.out.println("Додана персона: "+persona.toString());
-        System.out.println("ip: "+HttpRequestUtils.getClientIpAddress()
+    /*    System.out.println("ip: "+HttpRequestUtils.getClientIpAddress()
                 +"; Метод: "+HttpRequestUtils.getHttpMethod()
                 +"; Шлях: "+HttpRequestUtils.getPath()
                 +"; Тіло запиту: "+persona.toJSON().toString()
@@ -141,27 +140,6 @@ public class PersonaController {
         return ans;
     }
 
-    @PostMapping("add2")
-    public Answer add2Persona(@RequestBody String persona){
-    //    Answer ans = Persona.isValid(persona);
-        Answer ans = Answer.builder().status(Boolean.TRUE).descr("Success").result(persona).build();
-        
-    //    if(!ans.getStatus())return ans;
-    /*    
-        System.out.println("==============================================================================================");
-        System.out.println("Додана персона: "+persona.toString());
-        System.out.println("ip: "+HttpRequestUtils.getClientIpAddress()
-                +"; Метод: "+HttpRequestUtils.getHttpMethod()
-                +"; Шлях: "+HttpRequestUtils.getPath()
-                +"; Тіло запиту: "+persona.toJSON().toString()
-        );
-        */
-    
-        //формуємо та повертаємо користувачу результат, який був опрацьований в сервісі.
-    //    ans =  service.addPersona(persona);
-        
-        return ans;
-    }
     
 //Анотація PutMapping говорить, що описується обробка запиту типу HTTP PUT
 //Тут ми говоримо, що шлях http://localhost:8080/api/v1/persons буде використовуватись для оновлення користувача в базі даних.
@@ -209,6 +187,36 @@ public class PersonaController {
 
         return ans;
     }
-   
+
+    @GetMapping("unzr/{unzr}")
+    //Анотація @PathVariable говорить SPRINGу що це параметр, який потрібно прийняти через адресну строку
+    public Answer findByUnzr(@PathVariable String unzr){
+        Answer ans;
+        //формуємо та повертаємо результат, який був опрацьований в сервісі.
+        ans = service.findByUnzr(unzr);
+
+        return ans;
+    }
+
+    @GetMapping("pasport/{pasport}")
+    //Анотація @PathVariable говорить SPRINGу що це параметр, який потрібно прийняти через адресну строку
+    public Answer findByPasport(@PathVariable String pasport){
+        Answer ans;
+        //формуємо та повертаємо результат, який був опрацьований в сервісі.
+        ans = service.findByPasport(pasport);
+
+        return ans;
+    }
+
+    @GetMapping("birthDate/{birthDate}")
+    //Анотація @PathVariable говорить SPRINGу що це параметр, який потрібно прийняти через адресну строку
+    public Answer findByBirthDate(@PathVariable String birthDate){
+        Answer ans;
+        //формуємо та повертаємо результат, який був опрацьований в сервісі.
+        ans = service.findByBirthDate(birthDate);
+
+        return ans;
+    }
+    
 }
 

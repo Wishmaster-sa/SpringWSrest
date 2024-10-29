@@ -25,7 +25,16 @@ public interface PersonaRepository extends JpaRepository<Persona, Long>{
     
     //приклад пошуку користувача по RNOKPP
     Persona findByRnokpp(String rnokpp);
+
+    //приклад пошуку користувача по UNZR
+    Persona findByUnzr(String unzr);
+
+    //приклад пошуку користувача по Pasport
+    Persona findByPasport(String pasport);
     
+    //приклад пошуку користувача по birthDate
+    List <Persona> findByBirthDate(LocalDate birthDate);
+
     //приклад пошуку користувача по імені
     List <Persona> findAllByFirstName(String firstName);
     
