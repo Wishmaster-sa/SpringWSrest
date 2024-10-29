@@ -3,11 +3,17 @@
 
 function installService() {
 	echo 'Встановлюю сервіс...'
+ 	#modify service daemon for current user
+	autostartFile="./springws.service"
+ 	currentuser=$(stat -c "%G" .)
+	sed -i "s/User=sa/User=$currentuser/g" $autostartFile
 	sudo mkdir /opt/SpringWS
+	sudo mkdir /opt/SpringWS/config
 	sudo cp ./target/SpringWS-0.0.1-SNAPSHOT.jar /opt/SpringWS
+        sudo cp -R config/* /opt/SpringWS/config 
 	#sudo cp ./webservice.settings /opt/SpringWS
 	sudo cp ./springws.service /etc/systemd/system
-	sudo sudo systemctl daemon-reload
+	sudo systemctl daemon-reload
 	sudo systemctl enable springws.service
 	sudo systemctl start springws.service
 	sudo systemctl status springws.service

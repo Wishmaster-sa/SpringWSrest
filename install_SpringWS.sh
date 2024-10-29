@@ -4,6 +4,7 @@ db_user=spring_user
 db_pass='pass'
 db_name=db_spring
 netbeans19=apache-netbeans_19-1_all.deb 
+ans=y
 
 if [[ $EUID -ne 0 ]]; then
     echo "Скрипт потрібно запускати з правами root (додайте sudo перед командою)"
@@ -39,7 +40,7 @@ else
     echo "Прийнято"
 fi
 
-read -p "Чи бажаете Ви одразу наповнити базу даних випадковими персонами? (y/n): " ans
+#read -p "Чи бажаете Ви одразу наповнити базу даних випадковими персонами? (y/n): " ans
 
 echo "************************** 
 Ім'я бази даних: $db_name
@@ -172,11 +173,14 @@ sed -i "s/$old_base/$db_name/g" $propertiesFile
 autostartFile="./SpringWSrest/springws.service" 
 sed -i "s/User=sa/User=$currentuser/g" $autostartFile
 
-cd ./SpringWSrest
 #sudo bash mvnw -N wrapper:wrapper
-/usr/lib/apache-netbeans/java/maven/bin/mvn package
 
 sudo chown -R $currentuser:$currentuser ./SpringWSrest
+
+cd ./SpringWSrest
+
+/usr/lib/apache-netbeans/java/maven/bin/mvn package
+
 
 
 if [ "$ans" = "y" ]; then
@@ -190,18 +194,17 @@ if [ "$ans" = "y" ]; then
     ******************************************************************************"
     python3 -m pip install faker
 
-    sudo bash springws-service.sh install
+#    sudo bash springws-service.sh install
+#echo "******************************************************************************
+#    *                  Очікуємо на старт сервіса...
+#    ******************************************************************************"
+#    sleep 5s
     
-echo "******************************************************************************
-    *                  Очікуємо на старт сервіса...
-    ******************************************************************************"
-    sleep 5s
+#    python3 fill_fakerdb.py 100
 
-    python3 fill_fakerdb.py 100
+#    sudo systemctl stop springws.service
 
-    sudo systemctl stop springws.service
-
-    sleep 2s
+#    sleep 2s
 
 else
     echo "ok"
@@ -211,4 +214,10 @@ fi
 echo "******************************************************************************
 *                  ВІТАЄМО! РОЗГОРТАННЯ СЕРЕДОВИЩА ПРОЄКТУ ЗАВЕРШЕНО!
 ******************************************************************************"
+
+echo "**************************************************************************************
+    * Щоб запустити сервіс перейдить в папку проекта (SpringWSrest) та виконайте команду: sudo bash springws-service.sh install
+    * Щоб заповнити базу даних початковим набором виконайте команду: python3 fill_fakerdb.py 100
+    ****************************************************************************************"
+     
 

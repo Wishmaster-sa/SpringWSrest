@@ -149,7 +149,7 @@ public class PersonaServiceImpl implements PersonaInterface{
            //записуємо лог
            writeLog(ans);
           return ans;           //повертаємо результат до контролера.
-    }
+}
 
     //Ця анотація означає, що нам потрібно перевизначити цю процедуру/функцію
     //Спочатку дана функція описується в інтерфейсі класу, тут ми її перевизначаємо та реалізуємо.
@@ -221,7 +221,7 @@ public class PersonaServiceImpl implements PersonaInterface{
             }else {
                 LocalDateTime dt = LocalDateTime.now();
                 LocalDateTime dr = persona.getCheckedRequest();
-                if(dr==null){
+                if((dr==null)||(dr.getYear()==1)){
                     persona.setCheckedRequest(dt);
                     repository.save(persona);
                     ans.setResult("Request for checking Persona in progress!");       //Тут результат відповіді.
