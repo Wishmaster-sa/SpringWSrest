@@ -189,7 +189,7 @@ public class PersonaController {
         return ans;
     }
 
-    @GetMapping("unzr/{unzr}")
+    @GetMapping("find/unzr/{unzr}")
     //Анотація @PathVariable говорить SPRINGу що це параметр, який потрібно прийняти через адресну строку
     public Answer findByUnzr(@PathVariable String unzr){
         Answer ans;
@@ -199,7 +199,7 @@ public class PersonaController {
         return ans;
     }
 
-    @GetMapping("pasport/{pasport}")
+    @GetMapping("find/pasport/{pasport}")
     //Анотація @PathVariable говорить SPRINGу що це параметр, який потрібно прийняти через адресну строку
     public Answer findByPasport(@PathVariable String pasport){
         Answer ans;
@@ -209,7 +209,7 @@ public class PersonaController {
         return ans;
     }
 
-    @GetMapping("birthDate/{birthDate}")
+    @GetMapping("find/birthDate/{birthDate}")
     //Анотація @PathVariable говорить SPRINGу що це параметр, який потрібно прийняти через адресну строку
     public Answer findByBirthDate(@PathVariable String birthDate){
         Answer ans;
