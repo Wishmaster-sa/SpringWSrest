@@ -193,6 +193,7 @@ public class PersonaController {
     //Анотація @PathVariable говорить SPRINGу що це параметр, який потрібно прийняти через адресну строку
     public Answer findByUnzr(@PathVariable String unzr){
         Answer ans;
+        System.out.println("find by UNZR: "+unzr);
         //формуємо та повертаємо результат, який був опрацьований в сервісі.
         ans = service.findByUnzr(unzr);
 
@@ -203,6 +204,8 @@ public class PersonaController {
     //Анотація @PathVariable говорить SPRINGу що це параметр, який потрібно прийняти через адресну строку
     public Answer findByPasport(@PathVariable String pasport){
         Answer ans;
+
+        System.out.println("find by Pasport: "+pasport);
         //формуємо та повертаємо результат, який був опрацьований в сервісі.
         ans = service.findByPasport(pasport);
 
@@ -213,6 +216,8 @@ public class PersonaController {
     //Анотація @PathVariable говорить SPRINGу що це параметр, який потрібно прийняти через адресну строку
     public Answer findByBirthDate(@PathVariable String birthDate){
         Answer ans;
+        System.out.println("find by birth date: "+birthDate);
+
         //формуємо та повертаємо результат, який був опрацьований в сервісі.
         ans = service.findByBirthDate(birthDate);
 
