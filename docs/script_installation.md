@@ -16,7 +16,7 @@
 1. Завантажити скрипт:
 
 ```bash
-wget https://raw.githubusercontent.com/MadCat-88/Trembita_J_R_SyncSr/master/install_SpringWS.sh
+wget https://raw.githubusercontent.com/Wishmaster-sa/SpringWSrest/master/install_SpringWS.sh
 ```
 
 2.Зробити файл виконуваним:
