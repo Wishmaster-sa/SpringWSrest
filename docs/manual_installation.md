@@ -55,7 +55,7 @@ CREATE DATABASE your_db_name;
 
 6.3. Створити користувача:
 ```sql
-CREATE ROLE your_db_user LOGIN PASSWORD 'your_db_password'
+CREATE ROLE your_db_user LOGIN PASSWORD 'your_db_password';
 ```
 де:
 - `your_db_user` – логін користувача БД;
