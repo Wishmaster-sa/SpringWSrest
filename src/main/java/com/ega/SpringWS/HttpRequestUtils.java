@@ -5,9 +5,13 @@
 package com.ega.SpringWS;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -71,11 +75,32 @@ public class HttpRequestUtils {
     }
     
     //повертає тіло запиту
-    public static String getBody() {
+    public static String getBody()   {
 
+        String body = "";
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        InputStream br = null;
+        StringBuilder sb = new StringBuilder();
+        
+        BufferedReader reader = null;
+        
+        
+        if ("POST".equalsIgnoreCase(request.getMethod())) {
+            try {
+                    br = request.getInputStream();
+//                    br.reset();
+                    for (int ch; (ch = br.read()) != -1; ) {
+                        sb.append((char) ch);
+                    }
 
-        return request.getRequestURI();
+                    body = sb.toString();
+                } catch (IOException ex) {
+                body = "Error getting body: "+ex.getMessage();
+            }
+        
+        }
+        
+        return body;
     }
     
     

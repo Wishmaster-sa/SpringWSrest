@@ -75,15 +75,17 @@ public class LogRecordService implements LogRecordInterface{
         BufferedWriter writer;
         try {
             File f = new File(logFileName);
-            if(f.exists() && !f.isDirectory()) { 
+            if(!f.exists() && !f.isDirectory()) {
+                f.createNewFile();
+            }
                 writer = new BufferedWriter(new FileWriter(logFileName, true));
                 writer.append(toString+"\n");
                 writer.close();
-            }else{
-                writer = new BufferedWriter(new FileWriter(logFileName, true));
-                writer.write(toString);
-                writer.close();
-            }
+//            }else{
+//                writer = new BufferedWriter(new FileWriter(logFileName, true));
+//                writer.write(toString);
+//                writer.close();
+//            }
 
         } catch (IOException ex) {
             System.out.println("Неможливо зробити запис в лог-файл: "+ex.getMessage());

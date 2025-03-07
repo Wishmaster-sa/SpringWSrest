@@ -27,10 +27,12 @@ for x in range(num_persons):
 		lastName = fake.last_name_male()
 		firstName = fake.first_name_male()
 		middleName = fake.middle_name_male()
+		sex = "Чоловік"
 	else:
 		lastName = fake.last_name_female()
 		firstName = fake.first_name_female()
 		middleName = fake.middle_name_female()
+		sex = "Жінка"
 
 	print(lastName+" "+firstName+" "+middleName)
 		
@@ -42,6 +44,7 @@ for x in range(num_persons):
 	persona = {"firstName":firstName,
 		"patronymic":middleName,
 		"lastName":lastName,
+		"gender": sex,
 		"birthDate":birthdate.strftime('%Y-%m-%d'),
 		"rnokpp":fake.numerify(text = '##########'),
 		"pasport":sampletext[let1]+sampletext[let2]+fake.bothify(text = '######'),

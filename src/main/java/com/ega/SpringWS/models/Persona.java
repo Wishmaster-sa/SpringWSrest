@@ -16,6 +16,7 @@ import java.util.List;
 
 //Click https://projectlombok.org/features/ to view all features of lombok
 import lombok.Data;
+import lombok.NonNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -46,6 +47,7 @@ public class Persona {
     private String patronymic;
     private LocalDate birthDate;
     private String pasport;
+    private String gender;
     //Говорить, що наступне поле потрібно зробити унікальним в БД
     @Column(unique = true)
     private String unzr;                    //УНЗР
@@ -54,7 +56,7 @@ public class Persona {
     
     //Говорить, що наступне поле потрібно зробити унікальним в БД
     @Column(unique = true)
-//    @NonNull
+    @NonNull
     private String rnokpp;
     //Говорить, що значення цього поля буде розраховуватись автоматично
     @Transient
@@ -66,7 +68,7 @@ public class Persona {
         this.patronymic = "";
         this.birthDate = LocalDate.of(1, 1, 1);
         this.pasport = "";
-        this.unzr = "";
+        this.unzr = "01010001-00001";
         this.isChecked = false;
         this.CheckedRequest = LocalDateTime.of(1, 1, 1,0,0,0);
     }
@@ -87,6 +89,7 @@ public class Persona {
         jsData.put("firstName",getFirstName());
         jsData.put("lastName",getLastName());
         jsData.put("patronymic",getPatronymic());
+        jsData.put("gender",getGender());
         jsData.put("unzr",getUnzr());
         jsData.put("rnokpp",getRnokpp());
         jsData.put("pasport",getPasport());
@@ -123,6 +126,11 @@ public class Persona {
         if(!ret.getStatus())return ret;
         
         //Валідуємо РНОКПП (має містити тількі 10 цифр)
+        if(persona.getRnokpp().length()!=10){
+            ret.setResult("РНОКПП має бути заповнено та містити 10 цифр!");
+            ret.setStatus(Boolean.FALSE);
+            return ret;
+        }
         ret = isValidStr(persona.getRnokpp(),"0123456789",10);
         if(!ret.getStatus())return ret;
 
@@ -130,7 +138,7 @@ public class Persona {
         ret = isValidPasport(persona.getPasport());
         if(!ret.getStatus())return ret;
 
-        //Валідуємо УНЗР (може двух двох варіантів: або тільки цифри, або 8 цифр + дефіс + ще 5 цифр)
+        //Валідуємо УНЗР (може бути двох варіантів: або тільки цифри, або 8 цифр + дефіс + ще 5 цифр)
         ret = isValidUnzr(persona.getUnzr());
         
         return ret;
@@ -154,7 +162,7 @@ public class Persona {
                 }
             }
             case 8-> {
-                String allowedStr = "abcdefghijklmnopqrstuvwxyz";
+                String allowedStr = "abcdefghijklmnopqrstuvwxyzабвгґдеєжзиіїйклмнопрстуфхцчшщьюя";
 
                 for(int i=0;i < 2;i++){
                     if(!allowedStr.contains(checkStr.toLowerCase().subSequence(i, i+1))){
