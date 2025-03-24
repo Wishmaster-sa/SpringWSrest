@@ -2,7 +2,7 @@
 
 
 function installService() {
-	echo 'Встановлюю сервіс...'
+	echo 'Додаю сервіс до автозапуску'
  	#modify service daemon for current user
 	autostartFile="./springws.service"
  	currentuser=$(stat -c "%G" .)
@@ -36,7 +36,7 @@ function startService() {
 }
 
 function stopService() {
-	echo "Припиняю SpringWS сервіс..."
+	echo "Зупиняю SpringWS сервіс..."
 	sudo systemctl stop springws.service
 	sudo systemctl status springws.service
 }
@@ -49,10 +49,10 @@ fi
 
 if [ -z $1 ]; then
 	PS3='Будь-ласка, зробіть вибір: '
-	select option in "Встановити сервіс" "Запустити сервіс" "Припинити сервіс" "Видалити сервіс" "Вихід"
+	select option in "Додати сервіс до автозапуску" "Запустити сервіс" "Зупинити сервіс" "Видалити сервіс" "Вихід"
 	do
 	    case $option in
-		"Встановити сервіс")
+		"Додати сервіс до автозапуску")
 		    installService
 		    break
 		    ;;
@@ -60,7 +60,7 @@ if [ -z $1 ]; then
 		    startService
 		    break
 		    ;;
-		"Припинити сервіс")
+		"Зупинити сервіс")
 		    stopService
 		    break
 		    ;;
