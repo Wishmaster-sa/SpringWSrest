@@ -138,10 +138,11 @@ public class PersonaServiceImpl implements PersonaInterface{
           ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
             try {
                 updatedPersona = repository.findByRnokpp(persona.getRnokpp());
-                BeanUtils.copyProperties(persona, updatedPersona);
+                BeanUtils.copyProperties(persona, updatedPersona,"id");
                 repository.save(updatedPersona);
                 ans.setStatus(Boolean.TRUE);
                 ans.setDescr("Persona with RNOKPP "+persona.getRnokpp()+" updated successfully");
+                ans.setResult(updatedPersona.toString());
             }catch(Exception ex){
                 ans.setDescr("Error: "+ex.getMessage());
             }
