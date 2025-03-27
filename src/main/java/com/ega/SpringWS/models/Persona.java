@@ -100,6 +100,26 @@ public class Persona {
         
         return jsData;
     }  
+
+    @Override
+    public String toString(){
+        JSONObject jsData=new JSONObject();
+        //Persona persona = result.get(i);
+        jsData.put("id",getId());
+        jsData.put("firstName",getFirstName());
+        jsData.put("lastName",getLastName());
+        jsData.put("patronymic",getPatronymic());
+        jsData.put("gender",getGender());
+        jsData.put("unzr",getUnzr());
+        jsData.put("rnokpp",getRnokpp());
+        jsData.put("pasport",getPasport());
+        jsData.put("age",getAge());
+        jsData.put("birthDate",getBirthDate());
+        jsData.put("isChecked",getIsChecked());
+        jsData.put("CheckedRequest",getCheckedRequest());
+        
+        return jsData.toString();
+    }  
     
     //метод, який перетворює список користувачів на масив JSON
     public static JSONArray listToJSON(List <Persona> personsList){

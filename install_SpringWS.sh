@@ -116,20 +116,27 @@ echo "**************************************************************************
 
 sudo apt install curl -y
 
-echo "******************************************************************************
-*                  завантаження Apache NetBeans 19
-******************************************************************************"
-if [ -f ./$netbeans19 ]; then
-	echo "середовище вже завантажено"
-else 
-	curl https://archive.apache.org/dist/netbeans/netbeans-installers/19/$netbeans19 --output $netbeans19
-fi
+#echo "******************************************************************************
+#*                  завантаження Apache NetBeans 19
+#******************************************************************************"
+#if [ -f ./$netbeans19 ]; then
+#	echo "середовище вже завантажено"
+#else 
+#	curl https://archive.apache.org/dist/netbeans/netbeans-installers/19/$netbeans19 --output $netbeans19
+#fi
+
+#echo "******************************************************************************
+#*                  встановлення Apache NetBeans 19
+#******************************************************************************"
+
+#sudo dpkg -i $netbeans19
 
 echo "******************************************************************************
-*                  встановлення Apache NetBeans 19
+*                  встановлення Maven
 ******************************************************************************"
+sudo apt install maven 
 
-sudo dpkg -i $netbeans19
+
 
 echo "******************************************************************************
 *                  встановлення Github client
@@ -179,8 +186,8 @@ sudo chown -R $currentuser:$currentuser ./SpringWSrest
 
 cd ./SpringWSrest
 
-/usr/lib/apache-netbeans/java/maven/bin/mvn package
-
+#/usr/lib/apache-netbeans/java/maven/bin/mvn package
+/usr/bin/mvn package
 
 
 if [ "$ans" = "y" ]; then
