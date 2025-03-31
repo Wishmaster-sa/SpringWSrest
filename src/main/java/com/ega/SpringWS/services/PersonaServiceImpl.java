@@ -55,8 +55,14 @@ public class PersonaServiceImpl implements PersonaInterface{
             var result = repository.findAll();      //визиваемо SELECT з бази даних
             
             //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуємо в Статус відповіді
-            ans.setStatus(Boolean.TRUE);            
-            ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
+            if(result.size()>0){
+                ans.setStatus(Boolean.TRUE);            
+                ans.setDescr("");   //В описі відповіді зазначаємо, що запит успішний.
+            }else{
+                ans.setStatus(Boolean.FALSE);            
+                ans.setDescr("Персон за запитом не знайдено");   //В описі відповіді зазначаємо, що запит успішний.
+            }
+                   
             JSONArray arr = new JSONArray();
             for(int i = 0;i<result.size();i++){
                 JSONObject jsData=new JSONObject();
@@ -87,7 +93,7 @@ public class PersonaServiceImpl implements PersonaInterface{
             Persona result = repository.save(persona);
             //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
             ans.setStatus(Boolean.TRUE);            
-            ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
+            ans.setDescr("");   //В описі відповіді зазначаємо, що запит успішний.
             ans.setResult(result.toJSON().toString());       //Тут результат відповіді.
           }catch (Exception ex){                    //якщо помилка
               ans.setDescr(ex.getMessage());        //надаємо опис помилки
@@ -105,15 +111,15 @@ public class PersonaServiceImpl implements PersonaInterface{
     //Функція знаходить та повертає користувача за його rnokpp
     public Answer find(String rnokpp) {
           Answer ans;
-          ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
+          ans = Answer.builder().status(Boolean.FALSE).descr("Якась незрозуміла помилка").build();
           try{
             var result = repository.findByRnokpp(rnokpp);
             //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
-            ans.setStatus(Boolean.TRUE);
             if(result==null){
-                ans.setDescr("Person with RNOKPP: "+rnokpp+" not found in database");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setDescr("Персон з РНОКПП: "+rnokpp+" за запитом не знайдено");   //В описі відповіді зазначаємо, що запит успішний.
             }else{
-                ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setStatus(Boolean.TRUE);
+                ans.setDescr("");   //В описі відповіді зазначаємо, що запит успішний.
                 ans.setResult(result.toJSON().toString());       //Тут результат відповіді.
             }
           }catch (Exception ex){                    //якщо помилка
@@ -135,16 +141,24 @@ public class PersonaServiceImpl implements PersonaInterface{
     public Answer updatePersona(Persona persona) {
           Answer ans;
           Persona updatedPersona;
-          ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
+          ans = Answer.builder().status(Boolean.FALSE).descr("Якась незрозуміла помилка").build();
             try {
-                updatedPersona = repository.findByRnokpp(persona.getRnokpp());
-                BeanUtils.copyProperties(persona, updatedPersona,"id");
-                repository.save(updatedPersona);
-                ans.setStatus(Boolean.TRUE);
-                ans.setDescr("Persona with RNOKPP "+persona.getRnokpp()+" updated successfully");
-                ans.setResult(updatedPersona.toString());
+                String rnokpp = persona.getRnokpp();
+                updatedPersona = repository.findByRnokpp(rnokpp);
+                if(persona==null){
+                    ans.setStatus(Boolean.FALSE);
+                    ans.setDescr("Персону з РНОКПП "+rnokpp+" не було знайдено в БД!");   //В описі відповіді зазначаємо, що запит успішний.
+                    ans.setResult("Персону з РНОКПП "+rnokpp+" не було знайдено в БД!");  //Тут результат відповіді.
+                }else{
+                
+                    BeanUtils.copyProperties(persona, updatedPersona,"id");
+                    repository.save(updatedPersona);
+                    ans.setStatus(Boolean.TRUE);
+                    ans.setDescr("Персону з РНОКПП "+persona.getRnokpp()+" було успішно оновлено");
+                    ans.setResult(updatedPersona.toString());
+                }
             }catch(Exception ex){
-                ans.setDescr("Error: "+ex.getMessage());
+                ans.setDescr("Помилка: "+ex.getMessage());
             }
           
            //записуємо лог
@@ -161,16 +175,25 @@ public class PersonaServiceImpl implements PersonaInterface{
     //Видаляє користувача за його РНОКПП
     public Answer deletePersona(String rnokpp) {
           Answer ans;
-          ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
+          ans = Answer.builder().status(Boolean.FALSE).descr("Якась незрозуміла помилка").build();
           try{
-            repository.deleteByRnokpp(rnokpp);
-            //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
-            ans.setStatus(Boolean.TRUE);
-            ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
-            ans.setResult("Persona with RNOKPP: "+rnokpp+" was deleted!");  //Тут результат відповіді.
-          }catch (Exception ex){                    //якщо помилка
-              ans.setDescr(ex.getMessage());        //надаємо опис помилки
-          }
+              //спочатку шукаємо персону чи є вона в базі
+                Persona persona = repository.findByRnokpp(rnokpp);
+                if(persona==null){
+                    ans.setStatus(Boolean.FALSE);
+                    ans.setDescr("Персону з РНОКПП "+rnokpp+" не було знайдено в БД!");   //В описі відповіді зазначаємо, що запит успішний.
+                    ans.setResult("Персону з РНОКПП "+rnokpp+" не було знайдено в БД!");  //Тут результат відповіді.
+                }else{
+                    repository.deleteByRnokpp(rnokpp);
+                    //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
+                    ans.setStatus(Boolean.TRUE);
+                    ans.setDescr("Персону з РНОКПП "+rnokpp+" було видалено!");   //В описі відповіді зазначаємо, що запит успішний.
+                    ans.setResult("Персону з РНОКПП "+rnokpp+" було видалено!");  //Тут результат відповіді.
+                }
+              
+            }catch (Exception ex){                    //якщо помилка
+                ans.setDescr(ex.getMessage());        //надаємо опис помилки
+            }
           
            //записуємо лог
            writeLog(ans);
@@ -181,18 +204,19 @@ public class PersonaServiceImpl implements PersonaInterface{
     //Функція проставляє признак isChecked для користувача
     public Answer checkup(String rnokpp) {
           Answer ans;
-          ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
+          ans = Answer.builder().status(Boolean.FALSE).descr("Якась незрозуміла помилка").build();
           try{
             Persona persona = repository.findByRnokpp(rnokpp);
-            ans.setStatus(Boolean.TRUE);            
-            ans.setDescr("Successful request");   //В описі відповіді вказуемо що запит успішний.
+            ans.setDescr("");   //В описі відповіді вказуемо що запит успішний.
             if(persona == null){
-                ans.setResult("Persona with rnokpp "+rnokpp+" not found in database!");       //Тут результат відповіді.                
+                ans.setStatus(Boolean.FALSE);            
+                ans.setResult("Персону з РНОКПП "+rnokpp+" не було знайдено в БД!");  //Тут результат відповіді.
+                ans.setDescr("Персону з РНОКПП "+rnokpp+" не було знайдено в БД!");  //Тут результат відповіді.
             }else{
                 persona.setIsChecked(Boolean.TRUE);
                 repository.save(persona);
                 //якщо визов функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
-                ans.setResult("Persona is checked!");       //Тут результат відповіді.
+                ans.setResult("Персоні встановлено статус: Перевірена!");       //Тут результат відповіді.
                 
             }
           }catch (Exception ex){                    //якщо помилка
@@ -208,15 +232,15 @@ public class PersonaServiceImpl implements PersonaInterface{
     //Функція перевіряє поточний статус користувача
     public Answer checkPersona(String rnokpp) {
           Answer ans;
-          ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
+          ans = Answer.builder().status(Boolean.FALSE).descr("Якась незрозуміла помилка").build();
           try{
             Persona persona = repository.findByRnokpp(rnokpp);
-            ans.setStatus(Boolean.TRUE);            
-            ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
+            ans.setDescr("");   //В описі відповіді зазначаємо, що запит успішний.
             if(persona == null){
-                ans.setResult("Persona with rnokpp "+rnokpp+" not found in database!");       //Тут результат відповіді.                
+                ans.setResult("Персону з РНОКПП "+rnokpp+" не було знайдено в БД!");  //Тут результат відповіді.
             }else if(persona.getIsChecked()==true){
                 //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
+                ans.setStatus(Boolean.TRUE);            
                 ans.setResult("Persona is checked!");       //Тут результат відповіді.
                 
             }else {
@@ -225,15 +249,15 @@ public class PersonaServiceImpl implements PersonaInterface{
                 if((dr==null)||(dr.getYear()==1)){
                     persona.setCheckedRequest(dt);
                     repository.save(persona);
-                    ans.setResult("Request for checking Persona in progress!");       //Тут результат відповіді.
+                    ans.setResult("Запит про перевірку персони обробляється");       //Тут результат відповіді.
                 }else{
                     dr = dr.plusMinutes(5);
                     if (dt.isAfter(dr)){                    
                         persona.setIsChecked(Boolean.TRUE);
                         repository.save(persona);
-                        ans.setResult("Persona is checked!");       //Тут результат відповіді.
+                        ans.setResult("Персона перевірена!");       //Тут результат відповіді.
                     }else{
-                        ans.setResult("Checking Persona in progress!");       //Тут результат відповіді.
+                        ans.setResult("Перевірка персони ще триває!");       //Тут результат відповіді.
                     }
                     
                 }
@@ -270,15 +294,15 @@ public class PersonaServiceImpl implements PersonaInterface{
     //Пошук всіх користувачів по їх імені
     public Answer findByFirstName(String firstName) {
           Answer ans;
-          ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
+          ans = Answer.builder().status(Boolean.FALSE).descr("Якась незрозуміла помилка").build();
           try{
             List<Persona> result = repository.findAllByFirstName(firstName);
             //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
-            ans.setStatus(Boolean.TRUE);
             if(result.isEmpty()){
-                ans.setDescr("Person with firstName: "+firstName+" not found in database");   //В описі відповіді вказуемо що запит успішний.
+                ans.setDescr("Персон з іменем: "+firstName+" не знайдено в БД");   //В описі відповіді вказуемо що запит успішний.
             }else{
-                ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setStatus(Boolean.TRUE);
+                ans.setDescr("");   //В описі відповіді зазначаємо, що запит успішний.
                 ans.setResult(Persona.listToJSON(result).toString());       //Тут результат відповіді.
             }
           }catch (Exception ex){                    //якщо помилка
@@ -293,17 +317,16 @@ public class PersonaServiceImpl implements PersonaInterface{
     
     @Override
     //пошук всіх користувачів по початку їх прізвища
-    public Answer findByLastNameWith(String firstName) {
+    public Answer findByLastNameWith(String lastName) {
           Answer ans;
-          ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
+          ans = Answer.builder().status(Boolean.FALSE).descr("Якась незрозуміла помилка").build();
           try{
-            List<Persona> result = repository.findByLastNameStartingWith(firstName);
-            //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
-            ans.setStatus(Boolean.TRUE);
+            List<Persona> result = repository.findByLastNameStartingWith(lastName);
             if(result.isEmpty()){
-                ans.setDescr("Person with firstName: "+firstName+" not found in database");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setDescr("Персон з прізвищем: "+lastName+" не знайдено в БД");   //В описі відповіді зазначаємо, що запит успішний.
             }else{
-                ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setStatus(Boolean.TRUE);
+                ans.setDescr("");   //В описі відповіді зазначаємо, що запит успішний.
                 ans.setResult(Persona.listToJSON(result).toString());       //Тут результат відповіді.
             }
           }catch (Exception ex){                    //якщо помилка
@@ -321,15 +344,14 @@ public class PersonaServiceImpl implements PersonaInterface{
     //пошук всіх користувачів, які в імені або прізвищі мають зазначені символи
     public Answer findAllFirstNameContains(String firstName) {
           Answer ans;
-          ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
+          ans = Answer.builder().status(Boolean.FALSE).descr("Якась незрозуміла помилка").build();
           try{
             List<Persona> result = repository.findAllByFirstNameContaining(firstName);
-            //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
-            ans.setStatus(Boolean.TRUE);
             if(result.isEmpty()){
-                ans.setDescr("Person with firstName: "+firstName+" not found in database");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setDescr("Персон з іменем "+firstName+" не знайдено в БД");   //В описі відповіді зазначаємо, що запит успішний.
             }else{
-                ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setStatus(Boolean.TRUE);
+                ans.setDescr("");   //В описі відповіді зазначаємо, що запит успішний.
                 ans.setResult(Persona.listToJSON(result).toString());       //Тут результат відповіді.
             }
           }catch (Exception ex){                    //якщо помилка
@@ -346,18 +368,17 @@ public class PersonaServiceImpl implements PersonaInterface{
     //пошук всіх користувачів, вік яких входить до діапазону
     public Answer findByAgeRange(Integer startAge, Integer endAge) {
           Answer ans;
-          ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
+          ans = Answer.builder().status(Boolean.FALSE).descr("Якась незрозуміла помилка").build();
           try{
             LocalDate startDate = LocalDate.now().minusYears(endAge);
             LocalDate endDate = LocalDate.now().minusYears(startAge);
             
             List<Persona> result = repository.findByBirthDateBetween(startDate, endDate);
-            //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
-            ans.setStatus(Boolean.TRUE);
             if(result.isEmpty()){
-                ans.setDescr("Person with age beetween "+startAge+" and "+endAge+ " not found in database");   //В описі відповіді вказуемо що запит успішний.
+                ans.setDescr("Персон з віком з "+startAge+" по "+endAge+ " років не знайдено в БД");   //В описі відповіді вказуемо що запит успішний.
             }else{
-                ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setStatus(Boolean.TRUE);
+                ans.setDescr("");   //В описі відповіді зазначаємо, що запит успішний.
                 ans.setResult(Persona.listToJSON(result).toString());       //Тут результат відповіді.
             }
           }catch (Exception ex){                    //якщо помилка
@@ -376,15 +397,14 @@ public class PersonaServiceImpl implements PersonaInterface{
           Answer ans;
           LocalDate dt = LocalDate.parse(birthDate);
           
-          ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
+          ans = Answer.builder().status(Boolean.FALSE).descr("Якась незрозуміла помилка").build();
           try{
             List<Persona> result = repository.findByBirthDate(dt);
-            //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
-            ans.setStatus(Boolean.TRUE);
             if(result.isEmpty()){
-                ans.setDescr("Person with birthDate: "+birthDate+" not found in database");   //В описі відповіді вказуемо що запит успішний.
+                ans.setDescr("Персону з датою народження: "+birthDate+" не знайдено в БД");   //В описі відповіді вказуемо що запит успішний.
             }else{
-                ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setStatus(Boolean.TRUE);
+                ans.setDescr("");   //В описі відповіді зазначаємо, що запит успішний.
                 ans.setResult(Persona.listToJSON(result).toString());       //Тут результат відповіді.
             }
           }catch (Exception ex){                    //якщо помилка
@@ -400,15 +420,14 @@ public class PersonaServiceImpl implements PersonaInterface{
     @Override
     public Answer findByPasport(String pasport) {
           Answer ans;
-          ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
+          ans = Answer.builder().status(Boolean.FALSE).descr("Якась незрозуміла помилка").build();
           try{
             var result = repository.findByPasport(pasport);
-            //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
-            ans.setStatus(Boolean.TRUE);
             if(result==null){
-                ans.setDescr("Person with Pasport: "+pasport+" not found in database");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setDescr("Персону з паспортом: "+pasport+" не знайдено в БД");   //В описі відповіді зазначаємо, що запит успішний.
             }else{
-                ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setStatus(Boolean.TRUE);
+                ans.setDescr("");   //В описі відповіді зазначаємо, що запит успішний.
                 ans.setResult(result.toJSON().toString());       //Тут результат відповіді.
             }
           }catch (Exception ex){                    //якщо помилка
@@ -424,15 +443,14 @@ public class PersonaServiceImpl implements PersonaInterface{
     @Override
     public Answer findByUnzr(String unzr) {
           Answer ans;
-          ans = Answer.builder().status(Boolean.FALSE).descr("Unknown error").build();
+          ans = Answer.builder().status(Boolean.FALSE).descr("Якась незрозуміла помилка").build();
           try{
             var result = repository.findByUnzr(unzr);
-            //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
-            ans.setStatus(Boolean.TRUE);
             if(result==null){
-                ans.setDescr("Person with unzr: "+unzr+" not found in database");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setDescr("Персону з УНЗР: "+unzr+" не знайдено в БД");   //В описі відповіді зазначаємо, що запит успішний.
             }else{
-                ans.setDescr("Successful request");   //В описі відповіді зазначаємо, що запит успішний.
+                ans.setStatus(Boolean.TRUE);
+                ans.setDescr("");   //В описі відповіді зазначаємо, що запит успішний.
                 ans.setResult(result.toJSON().toString());       //Тут результат відповіді.
             }
           }catch (Exception ex){                    //якщо помилка
