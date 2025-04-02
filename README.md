@@ -107,7 +107,7 @@ sudo bash springws-service.sh
 ### Перевірка статусу вебсервісу
 
 ```bash
-sudo systemctl status springws_trembita_service
+sudo systemctl status springws.service
 ```
 
 ### Перегляд журналу подій
