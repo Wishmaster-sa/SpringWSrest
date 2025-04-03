@@ -71,7 +71,7 @@ GRANT ALL PRIVILEGES ON DATABASE your_db_name TO your_db_user;
 6.6. Вийти з консолі PostgreSQL:
 
 ```bash
-exit
+/q
 ```
 
 ### 7. Завантажити та встановити середовище розробки Apache NetBeans:
