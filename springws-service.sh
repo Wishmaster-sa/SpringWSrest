@@ -2,7 +2,7 @@
 
 
 function installService() {
-	echo 'Додаю сервіс до автозапуску'
+	echo 'Додаю сервіс до автозапуску...'
  	#modify service daemon for current user
 	autostartFile="./springws.service"
  	currentuser=$(stat -c "%G" .)
