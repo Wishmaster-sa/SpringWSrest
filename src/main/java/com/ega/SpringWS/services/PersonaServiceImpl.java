@@ -241,9 +241,11 @@ public class PersonaServiceImpl implements PersonaInterface{
             }else if(persona.getIsChecked()==true){
                 //якщо виклик функції не перервався помилкою, то вважаємо його успішним, та записуемо в Статус відповіді
                 ans.setStatus(Boolean.TRUE);            
-                ans.setResult("Persona is checked!");       //Тут результат відповіді.
+                ans.setResult("Персона перевірена!");       //Тут результат відповіді.
                 
             }else {
+                ans.setStatus(Boolean.TRUE);            
+                ans.setDescr("");            
                 LocalDateTime dt = LocalDateTime.now();
                 LocalDateTime dr = persona.getCheckedRequest();
                 if((dr==null)||(dr.getYear()==1)){
