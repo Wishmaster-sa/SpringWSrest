@@ -102,7 +102,7 @@ sudo bash springws-service.sh
 
 Після запуску вебсервісу можна отримати доступ до автоматичної **документації API** за наступними адресами:
 
-- Swagger UI: http://[адреса серверу]:8080//swagger-ui/index.html
+- Swagger UI: http://[адреса серверу]:8080/swagger-ui/index.html
 
 ### Перевірка статусу вебсервісу
 
