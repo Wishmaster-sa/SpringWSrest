@@ -127,12 +127,6 @@ public class PersonaController {
         
         System.out.println("==============================================================================================");
         System.out.println("Додана персона: "+persona.toString());
-    /*    System.out.println("ip: "+HttpRequestUtils.getClientIpAddress()
-                +"; Метод: "+HttpRequestUtils.getHttpMethod()
-                +"; Шлях: "+HttpRequestUtils.getPath()
-                +"; Тіло запиту: "+persona.toJSON().toString()
-        );
-        */
     
         //формуємо та повертаємо користувачу результат, який був опрацьований в сервісі.
         ans =  service.addPersona(persona);

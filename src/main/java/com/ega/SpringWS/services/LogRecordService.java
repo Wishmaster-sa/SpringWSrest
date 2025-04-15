@@ -81,11 +81,6 @@ public class LogRecordService implements LogRecordInterface{
                 writer = new BufferedWriter(new FileWriter(logFileName, true));
                 writer.append(toString+"\n");
                 writer.close();
-//            }else{
-//                writer = new BufferedWriter(new FileWriter(logFileName, true));
-//                writer.write(toString);
-//                writer.close();
-//            }
 
         } catch (IOException ex) {
             System.out.println("Неможливо зробити запис в лог-файл: "+ex.getMessage());
