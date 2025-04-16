@@ -8,13 +8,18 @@ function buildImage() {
 
 function setParameters() {
 	echo "Налаштовуємо параметри..."
-	nano ./docker.env
+	nano ./service.env
 }
 
 function startImage() {
 	echo "Запускаю Docker образ springrestservice ..."
 	sudo docker run -it --rm -p 8080:8080 --env-file ./service.env springrestservice:latest
 	
+}
+
+function removeImage() {
+	echo "Видаляю Docker образ springrestservice ..."
+	sudo docker rmi springrestservice:latest
 }
 
 
@@ -25,7 +30,7 @@ fi
 
 if [ -z $1 ]; then
 	PS3='Будь-ласка, зробіть вибір: '
-	select option in "Створити Docker образ" "Налаштувати Docker образ" "Запустити Docker образ" "Вихід"
+	select option in "Створити Docker образ" "Налаштувати Docker образ" "Запустити Docker образ" "Видалити Docker образ" "Вихід"
 	do
 	    case $option in
 		"Створити Docker образ")
@@ -38,6 +43,10 @@ if [ -z $1 ]; then
 		    ;;
 		"Налаштувати Docker образ")
 		    setParameters
+		    break
+		    ;;
+		"Видалити Docker образ")
+		    removeImage
 		    break
 		    ;;
 		"Вихід")
@@ -62,8 +71,11 @@ case $1 in
     'set')
         setParameters
         ;;
+    'remove')
+        removeImage
+        ;;
     *)
-        echo 'Usage: bash docker.sh build|start|set'
+        echo 'Usage: bash docker.sh build|start|set|remove'
         ;;
 esac
 
