@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.ega.SpringWS.services;
 
 import com.ega.SpringWS.interfaces.LogRecordInterface;
@@ -30,7 +26,8 @@ public class LogRecordService implements LogRecordInterface{
     @Value("${webservice.settings.loglevel:0}") 
     //рівень логування.
     private int logLevel;
-
+    
+    
     @Override
     public Boolean addRecord(LogRecord record) {
     //    System.out.println("logFileName = "+logFileName+"\nLogLevel = "+logLevel);
