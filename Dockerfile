@@ -13,22 +13,15 @@ FROM eclipse-temurin:21-jdk-jammy as deps
 
 WORKDIR /build
 
-# Устанавливаем Maven
+# Instaling Maven
 RUN apt-get update && apt-get install -y maven
 
-# Copy the mvnw wrapper with executable permissions.
-#COPY --chmod=0755 mvnw mvnw
+# Copy the project files
 COPY --chmod=0755 . .
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.m2 so that subsequent builds don't have to
 # re-download packages.
-# Кэшируем зависимости и собираем проект
-# Кэшируем зависимости и собираем проект
-#RUN mvn dependency:go-offline -DskipTests
-#RUN mvn package -DskipTests
-
-
 RUN --mount=type=bind,source=pom.xml,target=pom.xml \
     --mount=type=cache,target=/root/.m2 mvn dependency:go-offline -DskipTests
 
@@ -45,7 +38,6 @@ FROM deps as package
 WORKDIR /build
 
 COPY ./src src/
-#COPY . .
 RUN --mount=type=bind,source=pom.xml,target=pom.xml \
     --mount=type=cache,target=/root/.m2 \
     mvn package -DskipTests && \
@@ -101,4 +93,3 @@ COPY --from=extract build/target/extracted/application/ ./
 EXPOSE 8080
 
 ENTRYPOINT [ "java", "org.springframework.boot.loader.launch.JarLauncher" ]
-#CMD sh -c "find / -name SpringWS-0.0.1-SNAPSHOT.jar"
