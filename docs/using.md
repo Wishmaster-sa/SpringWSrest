@@ -266,7 +266,7 @@ curl -X 'GET' \
 
 | Метод HTTP |       Код сервісу       | Базова URL                        |
 |:----------:|:-----------------------:|-----------------------------------|
-|    GET     | Person Get By Parameter | http://your-server-ip:8080/api/v1/persons/delete |
+|    DELETE     | Person Get By Parameter | http://your-server-ip:8080/api/v1/persons/delete |
 
 **Параметри запиту**, що передаються в URL виглядають наступним чином:
 
@@ -356,7 +356,7 @@ curl -X 'DELETE' 'http://your-server-ip:8080/api/v1/persons/check/1234567892' \
 ```
 
 - відповідь на запит який надійшов в процесі обробки:
--
+
 ```
 {
   "status": true,

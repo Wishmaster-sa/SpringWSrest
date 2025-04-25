@@ -20,7 +20,7 @@ public class LogRecordService implements LogRecordInterface{
     //ініціалізація файлу налаштувань
     
     @Value("${webservice.settings.logfilename:springWSrest.log}")
-    //повний шлях до файлу лога
+    //повний шлях до лог-файлу
     private String logFileName;
 
     @Value("${webservice.settings.loglevel:0}") 
@@ -36,7 +36,7 @@ public class LogRecordService implements LogRecordInterface{
             case 0 -> AddRecordLevel0(record); //немає логування
             case 1 -> AddRecordLevel1(record); //тільки помилки
             case 2 -> AddRecordLevel2(record); //всі повідомлення, але без тіла запиту та без тіла відповіді.
-            case 3 -> AddRecordLevel3(record); //повний лог.
+            case 3 -> AddRecordLevel3(record); //детальне логування.
         }
         
         return true;
